@@ -3,8 +3,17 @@ package main
 import (
 	"log/slog"
 	"net/http"
+
+	httpSwagger "github.com/swaggo/http-swagger"
+
+	_ "gas-thief/app/docs"
 )
 
+// @title Gas Thief API
+// @version 1.0
+// @description API for gas price tracking
+// @host localhost:8080
+// @BasePath /
 func main() {
 	settings := LoadSettings()
 	db := connectToDB(settings)
@@ -12,6 +21,7 @@ func main() {
 
 	mux := http.NewServeMux()
 	mux.HandleFunc("GET /api/health", handleHealth(db))
+	mux.Handle("/swagger/", httpSwagger.Handler(httpSwagger.URL("/swagger/doc.json")))
 
 	slog.Info("starting web server", "port", settings.WebPort)
 	if err := http.ListenAndServe(":"+settings.WebPort, middleware(mux)); err != nil {

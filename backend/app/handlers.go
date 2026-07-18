@@ -20,6 +20,14 @@ func writeError(w http.ResponseWriter, status int, message string) {
 	writeJSON(w, status, map[string]string{"error": message})
 }
 
+// Health godoc
+// @Summary Show health status
+// @Description Returns database connection status, last API call timestamp, and total station count
+// @Tags health
+// @Produce json
+// @Success 200 {object} HealthStatus
+// @Failure 500 {object} map[string]string
+// @Router /api/health [get]
 func handleHealth(db *gorm.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		status, err := getHealthStatus(db)
