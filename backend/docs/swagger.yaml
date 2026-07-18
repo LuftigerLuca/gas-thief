@@ -1,0 +1,42 @@
+basePath: /
+definitions:
+  app.HealthStatus:
+    properties:
+      db_connected:
+        type: boolean
+      last_call:
+        type: string
+      total_stations:
+        type: integer
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: API for gas price tracking
+  title: Gas Thief API
+  version: "1.0"
+paths:
+  /api/health:
+    get:
+      description: Returns database connection status, last API call timestamp, and
+        total station count
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.HealthStatus'
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Show health status
+      tags:
+      - health
+schemes:
+- http
+- https
+swagger: "2.0"

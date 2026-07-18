@@ -14,6 +14,7 @@ import (
 // @description API for gas price tracking
 // @host localhost:8080
 // @BasePath /
+// @schemes http https
 func main() {
 	settings := LoadSettings()
 	db := connectToDB(settings)

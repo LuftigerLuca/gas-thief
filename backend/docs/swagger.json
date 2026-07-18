@@ -1,0 +1,62 @@
+{
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "swagger": "2.0",
+    "info": {
+        "description": "API for gas price tracking",
+        "title": "Gas Thief API",
+        "contact": {},
+        "version": "1.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/",
+    "paths": {
+        "/api/health": {
+            "get": {
+                "description": "Returns database connection status, last API call timestamp, and total station count",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "health"
+                ],
+                "summary": "Show health status",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/app.HealthStatus"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "app.HealthStatus": {
+            "type": "object",
+            "properties": {
+                "db_connected": {
+                    "type": "boolean"
+                },
+                "last_call": {
+                    "type": "string"
+                },
+                "total_stations": {
+                    "type": "integer"
+                }
+            }
+        }
+    }
+}
