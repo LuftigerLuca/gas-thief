@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -e
+
+echo "Running format check..."
+if ! make fmt-check; then
+    echo ""
+    echo "Run 'make fmt' to fix formatting."
+    exit 1
+fi
+
+echo "Running linter..."
+if ! make lint; then
+    echo ""
+    echo "Fix lint errors before committing."
+    exit 1
+fi
+
+echo "All checks passed."
