@@ -20,23 +20,6 @@ Gas Thief periodically fetches diesel, E5 and E10 prices from nearby gas station
 
 ## Quick Start
 
-### Docker (Recommended)
-
-```bash
-docker run -d \
-  -e API_KEY=your-api-key \
-  -e LOOK_UP_LAT=54.4633 \
-  -e LOOK_UP_LNG=9.0936 \
-  -e LOOK_UP_RADIUS=10 \
-  -e DB_HOST=your-db-host \
-  -e DB_PORT=3306 \
-  -e DB_USER=root \
-  -e DB_PASSWORD=secret \
-  -e DB_NAME=gas-thief \
-  --name gas-thief \
-  ghcr.io/luftigerluca/gas-thief:latest
-```
-
 ### Docker Compose
 
 ```yaml
@@ -70,8 +53,7 @@ volumes:
 
 ### Local
 
-```bash
-cp .env.example .env   # edit with your values
+```bash # edit with your values
 go run ./app
 ```
 
