@@ -10,7 +10,7 @@ RUN CGO_ENABLED=0 go build -ldflags="-s -w" -o gas-thief ./app
 
 FROM alpine:3.20
 
-RUN apk --no-cache add ca-certificates \
+RUN apk --no-cache add ca-certificates tzdata \
     && adduser -D -H appuser
 
 USER appuser
