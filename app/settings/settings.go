@@ -1,4 +1,4 @@
-package main
+package settings
 
 import (
 	"bufio"
@@ -29,7 +29,7 @@ func LoadSettings() *Settings {
 
 	s := Settings{
 		APIKey:         getString("API_KEY", "", true),
-		LookUpInterval: getUInt("LOOK_UP_INTERVAL", 60, false),
+		LookUpInterval: getUInt("LOOK_UP_INTERVAL", 15, false),
 		LookUpLat:      getFloat64("LOOK_UP_LAT", 0, true),
 		LookUpLng:      getFloat64("LOOK_UP_LNG", 0, true),
 		LoopUpRadius:   getFloat64("LOOK_UP_RADIUS", 10, false),
