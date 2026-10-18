@@ -53,13 +53,14 @@ volumes:
 
 ### Local
 
-```bash # edit with your values
+```bash
+cd backend   # put your .env here
 go run ./app
 ```
 
 ## Configuration
 
-All configuration is done via environment variables. Gas Thief looks for a `.env` file in the working directory, but env vars take precedence.
+All configuration is done via environment variables. Gas Thief looks for a `.env` file in the working directory (`backend/` when running locally), but env vars take precedence.
 
 | Variable           | Required | Default | Description                            |
 | ------------------ | -------- | ------- | -------------------------------------- |
@@ -107,20 +108,23 @@ git config core.hooksPath .githooks
 gas-thief/
 ├── .github/workflows/       # CI + Deploy workflows
 ├── .githooks/               # Git hooks (pre-commit)
-├── app/
-│   ├── main.go              # Entry point
-│   ├── scheduler.go         # Polling loop
-│   ├── persistence.go       # DB connection + save logic
-│   ├── settings/
-│   │   └── settings.go      # Env var loading
-│   ├── api/
-│   │   ├── client.go        # HTTP client for Tankerkoenig
-│   │   ├── dto.go           # Request/response types
-│   │   └── mapper.go        # API → domain mapping
-│   └── domain/
-│       └── models.go        # GORM models (Station, Call)
-├── Dockerfile               # Multi-stage build
-├── docker-compose.yml       # Local dev (MariaDB only)
-├── Makefile                 # Build, lint, format targets
-└── .golangci.yml            # Linter config
+├── Makefile                 # Delegates to backend/Makefile
+├── backend/
+│   ├── app/
+│   │   ├── main.go          # Entry point
+│   │   ├── scheduler.go     # Polling loop
+│   │   ├── persistence.go   # DB connection + save logic
+│   │   ├── settings/
+│   │   │   └── settings.go  # Env var loading
+│   │   ├── api/
+│   │   │   ├── client.go    # HTTP client for Tankerkoenig
+│   │   │   ├── dto.go       # Request/response types
+│   │   │   └── mapper.go    # API → domain mapping
+│   │   └── domain/
+│   │       └── models.go    # GORM models (Station, Call)
+│   ├── Dockerfile           # Multi-stage build
+│   ├── Makefile             # Build, lint, format targets
+│   └── .golangci.yml        # Linter config
+├── frontend/                # Web frontend (WIP)
+└── docker-compose.yml       # Local dev (MariaDB only)
 ```
