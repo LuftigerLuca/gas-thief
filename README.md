@@ -4,6 +4,7 @@
 
 [![CI](https://github.com/LuftigerLuca/gas-thief/actions/workflows/ci.yml/badge.svg)](https://github.com/LuftigerLuca/gas-thief/actions/workflows/ci.yml)
 [![Go](https://img.shields.io/badge/Go-1.25-00ADD8?logo=go&logoColor=white)](https://go.dev/)
+[![Next.js](https://img.shields.io/badge/Next.js-16-000000?logo=nextdotjs&logoColor=white)](https://nextjs.org/)
 [![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -54,8 +55,14 @@ volumes:
 ### Local
 
 ```bash
-cd backend   # put your .env here
+# Backend (put your .env in backend/)
+cd backend
 go run ./app
+
+# Frontend (http://localhost:3000)
+cd frontend
+pnpm install
+pnpm dev
 ```
 
 ## Configuration
@@ -81,9 +88,12 @@ All configuration is done via environment variables. Gas Thief looks for a `.env
 
 - Go 1.25+
 - [golangci-lint](https://golangci-lint.run/) v2
+- Node.js 20+ and [pnpm](https://pnpm.io/)
 - Docker (optional)
 
-### Makefile
+### Backend
+
+The root `Makefile` delegates to `backend/Makefile`:
 
 ```bash
 make check       # run all checks (format, lint, build, test)
@@ -93,6 +103,20 @@ make fmt         # format all files
 make fmt-check   # check formatting without modifying
 make test        # run tests
 ```
+
+### Frontend
+
+Next.js app with Tailwind CSS and [shadcn/ui](https://ui.shadcn.com/). Run from `frontend/`:
+
+```bash
+pnpm dev         # start dev server
+pnpm build       # production build
+pnpm lint        # run ESLint
+pnpm typecheck   # run tsc
+pnpm format      # format with Prettier
+```
+
+See [`frontend/README.md`](frontend/README.md) for details.
 
 ### Pre-commit Hook
 
@@ -125,6 +149,12 @@ gas-thief/
 │   ├── Dockerfile           # Multi-stage build
 │   ├── Makefile             # Build, lint, format targets
 │   └── .golangci.yml        # Linter config
-├── frontend/                # Web frontend (WIP)
+├── frontend/
+│   ├── app/                 # Next.js App Router (layout, pages, global styles)
+│   ├── components/          # React components (shadcn/ui lands in components/ui)
+│   ├── hooks/               # Custom React hooks
+│   ├── lib/                 # Utilities
+│   ├── public/              # Static assets
+│   └── package.json         # Scripts + dependencies (pnpm)
 └── docker-compose.yml       # Local dev (MariaDB only)
 ```

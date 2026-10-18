@@ -1,5 +1,6 @@
 # Environment
-.env
+.env*
+!.env.example
 docker-compose.yml
 
 # Go
@@ -27,6 +28,7 @@ node_modules/
 # Next.js
 .next/
 out/
+.vercel
 
 # Build
 build/
